@@ -57,24 +57,56 @@ fetch("http://localhost:5678/api/works")
       figure.appendChild(edit);
 
 
-      // ajout de l'evenement au moment du click sur le bouton supprimer
+      // ajout de l'evenement au moment du click sur le bouton supprimer et la function pour delete une img
 
-      btnIcon.addEventListener('click', (e) => {
+      btnIcon.addEventListener('click', function(e) {
+        e.preventDefault();
         console.log(e)
-        deleteImg(e.target.parentNode.parentNode)
+        // code de suppression de photo
+        const id = figure.id
+        console.log("id", id);
+        fetch("http://localhost:5678/api/works/"+ id,{
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+        })
       })
-    
   });
 });
 
-// function pour delete une image
 
-  function deleteImg(figure) {
-    const id = figure.id
-    console.log("id", id);
-    fetch("http://localhost:5678/api/works/"+ id,{
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
-        
-    })
-  }
+
+
+
+// function pour delete une image
+// function deleteImg(figure){
+//   const id = figure.id
+//   console.log("id", id);
+//   fetch("http://localhost:5678/api/works/"+ id,{
+//       method: 'DELETE',
+//       headers: { Authorization: `Bearer ${token}` }
+//   })
+// }
+
+
+
+
+
+
+//   // Sélectionnez votre bouton de suppression de photo
+// const boutonSupprimer = document.querySelector('.btn-delete');
+
+// // Ajoutez un écouteur d'événements sur l'événement de clic
+// boutonSupprimer.addEventListener('click', function(event) {
+//   // Empêchez le comportement par défaut du navigateur
+//   event.preventDefault();
+
+//   
+//     const id = figure.id
+//     console.log("id", id);
+//     fetch("http://localhost:5678/api/works/"+ id,{
+//         method: 'DELETE',
+//         headers: { Authorization: `Bearer ${token}` }
+//     })
+  
+// });
+//deleteImg(e.parentNode.parentNode)
